@@ -1,0 +1,140 @@
+---
+import Facebook from "../assets/icons/Facebook.png";
+import Instagram from "../assets/icons/Instagram.png";
+import Twitter from "../assets/icons/Twitter.png";
+import LinkedIn from "../assets/icons/LinkedIn.png";
+import Image from "astro/components/Image.astro";
+---
+
+<footer>
+  <p>Join our newsletter to stay up to date on features and releases.</p>
+  <div class="form">
+    <form action="/subscribe">
+      <input
+        type="email"
+        name="email"
+        placeholder="enter your email address"
+        required
+      />
+      <button type="submit">Subscribe</button>
+      By subscribing you agree to with our Privacy Policy and provide consent to
+      receive updates from our company.
+    </form>
+  </div>
+
+  <div class="links">
+    <ul>
+      <p>About us</p>
+      <li><a href="home">Home</a></li>
+      <li><a href="about">About</a></li>
+      <li><a href="services">Services</a></li>
+      <li><a href="teams">Teams</a></li>
+      <li><a href="contact">Contact</a></li>
+    </ul>
+
+    <ul>
+      <p>Services</p>
+      <li><a href="windows">Windows</a></li>
+      <li><a href="residential">Residential</a></li>
+      <li><a href="commercial">Commercial</a></li>
+      <li><a href="apartment">Apartment</a></li>
+      <li><a href="residential">Residential</a></li>
+    </ul>
+
+    <div class="social">
+      <p>Follow Us</p>
+      <a
+        href="https://www.facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={Facebook} alt="Facebook icon" width={24} height={24} />
+        Facebook
+      </a>
+
+      <a
+        href="https://www.instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={Instagram} alt="Instagram" width={24} height={24} />
+        Instagram
+      </a>
+
+      <a
+        href="https://www.twitter.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={Twitter} alt="Twitter" width={24} height={24} />
+        Twitter
+      </a>
+
+      <a
+        href="https://www.LinkedIn.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={LinkedIn} alt="LinkedIn" width={24} height={24} />
+        LinkedIn
+      </a>
+    </div>
+  </div>
+  <p>&copy; 2023 Your Company. All rights reserved.</p>
+</footer>
+
+<style>
+  footer {
+    background-color: aliceblue;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form {
+    display: flex;
+    gap: 16px;
+  }
+
+  form {
+    display: flex;
+    gap: 16px;
+  }
+
+  input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+
+  .links {
+    display: flex;
+    gap: 16px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .social {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  a {
+    display: flex;
+    gap: 8px;
+    text-decoration: none;
+    color: black;
+  }
+</style>
