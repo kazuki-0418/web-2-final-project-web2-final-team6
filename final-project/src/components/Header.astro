@@ -1,10 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import ddsgnr from "../assets/logos/ddsgnr.png";
-import Banner from "./Banner.astro";
 ---
 <header>
-    <Banner />
+
     <nav>
         <Image src={ddsgnr} alt="Logo" width={130.6} />
         <div class="desktop_links">
@@ -39,14 +38,14 @@ import Banner from "./Banner.astro";
     </div>
 </header>
 <script>
-  const btn = document.querySelector('.request_quote');
+  const btn = document.querySelector('.request_quote')!;
   btn.addEventListener('click', () => {
     window.location.href = '/contact';
   })
 
   document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const dropdown = document.getElementById('dropdown');
+    const hamburger = document.getElementById('hamburger')!;
+    const dropdown = document.getElementById('dropdown')!;
 
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
@@ -56,8 +55,9 @@ import Banner from "./Banner.astro";
 </script>
 <style lang="scss">
   header {
-    position: relative;
-    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
     nav {
       padding: 0 4rem;
@@ -67,9 +67,6 @@ import Banner from "./Banner.astro";
       align-items: center;
       border-top: 1px solid black;
       border-bottom: 1px solid black;
-      z-index: 1000; /* 避免被其他元素覆蓋 */
-      position: sticky;
-      top: 0;
       background-color: white;
 
       .desktop_links {
