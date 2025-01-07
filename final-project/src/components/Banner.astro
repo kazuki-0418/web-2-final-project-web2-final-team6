@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import facebook from "../assets/icons/Facebook.png";
+import instagram from "../assets/icons/Instagram.png";
+import linkIn from "../assets/icons/LinkedIn.png";
+import twitter from "../assets/icons/Twitter.png";
+---
+<section id="banner">
+    <div class="container">
+        <div class="informations">
+            <div><strong>For emergency cases: 567 123 45 67</strong></div>
+            <div>Location: 121 Wallstreet Street, NY , USA </div>
+            <div>Open hours: 9.00-24.00 Mon-Sat</div>
+            <div>Email:info@ddsgnr.com</div>
+        </div>
+        <div class="contacts">
+            <Image src={facebook} alt="Facebook Logo" width={24} height={24} />
+            <Image src={instagram} alt="Instagram Logo" width={24} height={24} />
+            <Image src={linkIn} alt="Linked In Logo" width={24} height={24} />
+            <Image src={twitter} alt="Twitter Logo" width={24} height={24} />
+        </div>
+    </div>
+</section>
+<style lang="scss">
+  #banner {
+    height: 54px;
+    padding: 0 4rem;
+    align-content: center;
+
+    .container {
+      display: flex;
+      height: 30px;
+      justify-content: space-between;
+
+      .informations {
+        display: flex;
+        height: 100%;
+
+        div {
+          padding: 0 1rem;
+          border-left: 1px solid black;
+          border-right: none;
+          border-top: none;
+          border-bottom: none;
+          align-content: center;
+
+          &:first-child {
+            border-left: none;
+            padding-left: 0;
+          }
+        }
+      }
+
+      .contacts {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        img {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    #banner {
+      display: none;
+    }
+  }
+</style>
