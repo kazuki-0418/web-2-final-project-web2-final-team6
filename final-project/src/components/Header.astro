@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import ddsgnr from "../assets/logos/ddsgnr.png";
 import Banner from "./Banner.astro";
 ---
-<section id="header">
+<header>
     <Banner />
     <nav>
         <Image src={ddsgnr} alt="Logo" width={130.6} />
@@ -31,13 +31,13 @@ import Banner from "./Banner.astro";
             <button class="request_quote">Request A Quote</button>
         </div>
         <div class="informations">
-            <div>For emergency cases: 567 123 45 67</div>
+            <div><strong>For emergency cases: 567 123 45 67</strong></div>
             <div>Location: 121 Wallstreet Street, NY , USA </div>
             <div>Open hours: 9.00-24.00 Mon-Sat</div>
             <div>Email:info@ddsgnr.com</div>
         </div>
     </div>
-</section>
+</header>
 <script>
   const btn = document.querySelector('.request_quote');
   btn.addEventListener('click', () => {
@@ -55,8 +55,9 @@ import Banner from "./Banner.astro";
   });
 </script>
 <style lang="scss">
-  #header {
+  header {
     position: relative;
+    height: 100vh;
 
     nav {
       padding: 0 4rem;
@@ -64,6 +65,12 @@ import Banner from "./Banner.astro";
       height: 72px;
       justify-content: space-between;
       align-items: center;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      z-index: 1000; /* 避免被其他元素覆蓋 */
+      position: sticky;
+      top: 0;
+      background-color: white;
 
       .desktop_links {
         display: flex;
@@ -181,13 +188,13 @@ import Banner from "./Banner.astro";
   }
 
   @media (max-width: 1024px) {
-    #header nav .desktop_links {
+    header nav .desktop_links {
       display: none;
     }
   }
 
   @media (min-width: 1024px) {
-    #header nav .hamburger_menu {
+    header nav .hamburger_menu {
       display: none;
     }
   }
