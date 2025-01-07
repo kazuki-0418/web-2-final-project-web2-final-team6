@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Banner from "../components/Banner.astro";
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -19,9 +20,155 @@ import Banner from "../components/Banner.astro";
 </html>
 
 <style>
-	html,
-	body {
+	/* =======================================================
+   CSS Reset - Optimized for Practical Use
+   ======================================================= */
+
+	/* Reset default margins and box model for all elements */
+	*,
+	*::before,
+	*::after {
 		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	/* Basic settings for HTML */
+	html {
+		font-size: 16px; /* Base font size */
+		line-height: 1.5; /* Readable line height */
+		scroll-behavior: smooth; /* Enable smooth scrolling by default */
+		-webkit-text-size-adjust: 100%; /* Disable font size adjustments on mobile */
+		-webkit-tap-highlight-color: transparent; /* Disable tap highlight on mobile */
+	}
+
+	/* Basic settings for the body */
+	body {
+		min-height: 100vh;
+		font-family: "Arial", sans-serif; /* Change based on project needs */
+		font-weight: 400;
+		color: #333; /* Default text color */
+		background-color: #fff; /* Default background color */
+		text-rendering: optimizeSpeed;
+		-webkit-font-smoothing: antialiased; /* Enable smooth font rendering */
+	}
+
+	/* Remove default styles for lists */
+	ul,
+	ol {
+		list-style: none;
+	}
+
+	/* Reset anchor link styles */
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/* Reset table styles */
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
 		width: 100%;
+	}
+
+	th,
+	td {
+		text-align: left;
+		vertical-align: top;
+		padding: 0.5em;
+	}
+
+	/* Reset styles for images and media */
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+
+	svg {
+		fill: currentColor; /* Sync SVG icon color with text color */
+	}
+
+	/* Reset styles for form elements */
+	button,
+	input,
+	textarea,
+	select {
+		font: inherit;
+		color: inherit;
+		background: none;
+		border: none;
+		outline: none;
+		padding: 0;
+		appearance: none; /* Remove default browser styles */
+	}
+
+	textarea {
+		resize: none; /* Disable resizing by default */
+	}
+
+	/* Improve button usability */
+	button {
+		cursor: pointer;
+		background-color: transparent;
+		border: none;
+	}
+
+	button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	/* Reset iframe styles */
+	iframe {
+		border: 0;
+	}
+
+	/* Default settings for heading tags */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: inherit;
+		font-weight: inherit;
+	}
+
+	/* Reset fieldset and label styles */
+	fieldset {
+		border: 0;
+	}
+
+	legend {
+		display: block;
+		margin-bottom: 0.5em;
+		font-weight: bold;
+	}
+
+	label {
+		display: inline-block;
+		margin-bottom: 0.5em;
+	}
+
+	/* Improve focus rings on mobile devices */
+	:focus {
+		outline: 2px solid #005fcc; /* Enhance accessibility with a visible focus ring */
+		outline-offset: 2px;
+	}
+
+	:focus:not(:focus-visible) {
+		outline: none; /* Restrict focus visuals */
+	}
+
+	/* Example for hiding scrollbars (optional) */
+	::-webkit-scrollbar {
+		width: 0;
+		height: 0;
 	}
 </style>
