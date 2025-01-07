@@ -1,26 +1,19 @@
 ---
-import { init, send } from "emailjs-com";
+import emailjs from "@emailjs/browser";
 
 let emailStatusMessage = "";
+emailjs.init(import.meta.env.PUBLIC_KEY);
 
 if (Astro.request.method === "POST") {
+  const data = await Astro.request.formData();
+
   try {
-    const data = await Astro.request.formData();
     const full_name = data.get("full_name");
     const phone_number = data.get("phone_number");
     const service = data.get("service");
     const time = data.get("time");
 
-    console.dir({
-      full_name,
-      phone_number,
-      service,
-      time,
-      message: data.get("message"),
-    });
-    init(import.meta.env.PUBLIC_KEY);
-
-    const emailData = {
+    const form = {
       full_name,
       phone_number,
       service,
@@ -28,22 +21,20 @@ if (Astro.request.method === "POST") {
       message: data.get("message"),
     };
 
-    await send(
+    console.log("");
+    await emailjs.send(
       // 「Email Services」を開くと「Service ID」が表示されています
       import.meta.env.SERVICE_ID,
       // 「Email Templates」を開くと「Template ID」が表示されています
       import.meta.env.TEMPLATE_ID,
-      emailData,
-      // 「Account」を開くと「Public Key」が表示されています
-      import.meta.env.PUBLIC_KEY
+      form,
+      // // 「Account」を開くと「Public Key」が表示されています
+      // import.meta.env.PUBLIC_KEY,
     );
-
-    emailStatusMessage = "メールが送信されました！返信をお待ち下さい。";
-
-    // Do something with the data
+    emailStatusMessage = "Your email has been sent! Please wait for a reply.";
   } catch (error) {
     emailStatusMessage =
-      "メール送信時にエラーが発生しました！お手数ですが再度送信してください。";
+      "An error occurred while sending the email! Please resend.";
     if (error instanceof Error) {
       console.error(emailStatusMessage + ":", error.message);
     }
@@ -54,9 +45,10 @@ if (Astro.request.method === "POST") {
 <div class="contact-container">
   <section>
     <h1>Contact us</h1>
+    <h3>{import.meta.env.PUBLIC_KEY}</h3>
     <h2>Request a quote</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <form method="POST" class="form">
+    <form class="form" method="POST">
       <div class="form-row">
         <div class="input-container">
           <label for="full_name">Full Name</label>
@@ -71,7 +63,7 @@ if (Astro.request.method === "POST") {
       <div class="form-row">
         <div class="dropdown-container">
           <label for="service">Select service</label>
-          <select id="service" class="dropdown">
+          <select id="service" class="dropdown" name="service" required>
             <option value="" disabled selected></option>
             <option value="general_cleaning">General Cleaning</option>
             <option value="deep_cleaning">Deep Cleaning</option>
@@ -89,7 +81,7 @@ if (Astro.request.method === "POST") {
         </div>
         <div class="dropdown-container">
           <label for="time">Select time</label>
-          <select id="time" class="dropdown">
+          <select id="time" class="dropdown" name="time" required>
             <option value="" disabled selected></option>
             <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
             <option value="afternoon">Afternoon (1:00 PM - 4:00 PM)</option>
@@ -101,7 +93,8 @@ if (Astro.request.method === "POST") {
 
       <div class="message-box">
         <label for="message">Message</label>
-        <textarea id="message" placeholder="Type your message..."></textarea>
+        <textarea id="message" placeholder="Type your message..." name="message"
+        ></textarea>
       </div>
 
       <div class="checkbox-row">
