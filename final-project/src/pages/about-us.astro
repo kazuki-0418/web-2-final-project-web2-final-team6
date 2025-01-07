@@ -74,6 +74,7 @@ img {
     font-weight: 700;
     font-family: "Roboto", serif;
     font-style: normal;
+    line-height: normal;
     margin: 0 auto;
 }
 
@@ -81,7 +82,7 @@ img {
 
 p{
     color: black;
-    font-size: 18px;
+    font-size: 24px;
     font-family: "Roboto", serif;
     font-style: normal;
     font-weight: 400;
@@ -90,16 +91,57 @@ p{
 button {
     color: white;
     background-color: black;
-    font-size: 16px;
+    font-size: 20px;
     font-family: "Roboto", serif;
     font-style: normal;
     font-weight: 400;
     border-radius: 5px;
     border: 1px solid black;
-    padding: 10px;
+    padding: 18px;
     margin-top: 30px;
 }
 
+@media all and (max-width: 1024px) {
+    main {
+    flex-direction: column; /* Cambia el diseño a una columna para dispositivos móviles */
+    gap: 20px; /* Añade espacio entre los contenedores */
+    overflow-x: hidden;
+    margin-top: -125px;
+  }
+
+  .containerOne, .containerTwo {
+    width: 100%; /* Los contenedores ocupan todo el ancho disponible */
+    margin-left: -48px;
+  }
+
+  .containerTwo {
+    margin-top: -65px;
+  }
+
+    .about{
+        font-size: 20px;
+}
+
+
+  .hedAbout {
+    line-height: normal; /* Reduce el tamaño de la cabecera para móviles */
+  }
+
+  p {
+    font-size: 22px; /* Reduce el tamaño del texto para facilitar la lectura */
+  }
+
+  button {
+    font-size: 20px; /* Reduce el tamaño del botón */
+    padding: 16px 20px; /* Ajusta el padding del botón */
+    border-radius: 8px;
+  }
+
+  img {
+    height: auto; /* Deja que la imagen ajuste su altura automáticamente */
+    transform: scaleX(-1);
+  }
+}
 
 </style>
 
