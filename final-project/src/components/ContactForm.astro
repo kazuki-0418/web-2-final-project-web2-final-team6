@@ -1,9 +1,6 @@
 ---
-import emailjs from "@emailjs/browser";
-
+import sendGrid from "@sendgrid/mail";
 let emailStatusMessage = "";
-emailjs.init(import.meta.env.PUBLIC_KEY);
-
 if (Astro.request.method === "POST") {
   const data = await Astro.request.formData();
 
@@ -21,17 +18,7 @@ if (Astro.request.method === "POST") {
       message: data.get("message"),
     };
 
-    console.log("");
-    await emailjs.send(
-      // 「Email Services」を開くと「Service ID」が表示されています
-      import.meta.env.SERVICE_ID,
-      // 「Email Templates」を開くと「Template ID」が表示されています
-      import.meta.env.TEMPLATE_ID,
-      form,
-      // // 「Account」を開くと「Public Key」が表示されています
-      // import.meta.env.PUBLIC_KEY,
-    );
-    emailStatusMessage = "Your email has been sent! Please wait for a reply.";
+    sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
   } catch (error) {
     emailStatusMessage =
       "An error occurred while sending the email! Please resend.";
@@ -45,10 +32,9 @@ if (Astro.request.method === "POST") {
 <div class="contact-container">
   <section>
     <h1>Contact us</h1>
-    <h3>{import.meta.env.PUBLIC_KEY}</h3>
     <h2>Request a quote</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <form class="form" method="POST">
+    <form class="form" id="contact-form" method="POST">
       <div class="form-row">
         <div class="input-container">
           <label for="full_name">Full Name</label>
