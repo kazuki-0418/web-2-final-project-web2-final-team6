@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@astrojs/vercel": "^8.0.1",
-    "@emailjs/browser": "^4.4.1",
     "@sendgrid/mail": "^8.1.4",
     "astro": "^5.1.2"
   }

@@ -1,31 +1,63 @@
 ---
 import sendGrid from "@sendgrid/mail";
+
+sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
 let emailStatusMessage = "";
+
 if (Astro.request.method === "POST") {
-  const data = await Astro.request.formData();
+  const formData = await Astro.request.formData();
 
-  try {
-    const full_name = data.get("full_name");
-    const phone_number = data.get("phone_number");
-    const service = data.get("service");
-    const time = data.get("time");
+  const full_name = formData.get("full_name");
+  const phone_number = formData.get("phone_number");
+  const service = formData.get("service");
+  const time = formData.get("time");
 
-    const form = {
-      full_name,
-      phone_number,
-      service,
-      time,
-      message: data.get("message"),
-    };
+  const form = {
+    full_name,
+    phone_number,
+    service,
+    time,
+    message: formData.get("message"),
+  };
 
-    sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
-  } catch (error) {
-    emailStatusMessage =
-      "An error occurred while sending the email! Please resend.";
-    if (error instanceof Error) {
-      console.error(emailStatusMessage + ":", error.message);
-    }
-  }
+  const msg = {
+    to: "cleaners@example.com",
+    from: "kazuki.castle0418@gmail.com",
+    subject: `New quote request from ${full_name}`,
+    replyTo: {
+      email: "kazuki.castle0418@gmail.com",
+      name: full_name,
+    },
+    text: `
+      Full Name: ${full_name}
+      Phone Number: ${phone_number}
+      Service: ${service}
+      Time: ${time}
+      Message: ${form.message}
+    `,
+  } as sendGrid.MailDataRequired;
+
+  sendGrid
+    .send(msg)
+    .then((res) => {
+      emailStatusMessage = "Email sent successfully!";
+      window.alert(emailStatusMessage);
+      console.log(res);
+    })
+    .catch((error) => {
+      emailStatusMessage =
+        "An error occurred while sending the email! Please resend.";
+      if (error instanceof Error) {
+        window.alert(`${emailStatusMessage} ${error.message}`);
+      }
+    })
+    .finally(() => {
+      formData.delete("full_name");
+      formData.delete("phone_number");
+      formData.delete("service");
+      formData.delete("time");
+      formData.delete("message");
+    });
 }
 ---
 
