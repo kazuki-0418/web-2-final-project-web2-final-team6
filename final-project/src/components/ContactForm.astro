@@ -1,0 +1,281 @@
+---
+import sendGrid from "@sendgrid/mail";
+
+sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
+let emailStatusMessage = "";
+
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData();
+
+  const full_name = formData.get("full_name");
+  const phone_number = formData.get("phone_number");
+  const service = formData.get("service");
+  const time = formData.get("time");
+
+  const form = {
+    full_name,
+    phone_number,
+    service,
+    time,
+    message: formData.get("message"),
+  };
+
+  const msg = {
+    to: "cleaners@example.com",
+    from: "kazuki.castle0418@gmail.com",
+    subject: `New quote request from ${full_name}`,
+    replyTo: {
+      email: "kazuki.castle0418@gmail.com",
+      name: full_name,
+    },
+    text: `
+      Full Name: ${full_name}
+      Phone Number: ${phone_number}
+      Service: ${service}
+      Time: ${time}
+      Message: ${form.message}
+    `,
+  } as sendGrid.MailDataRequired;
+
+  sendGrid
+    .send(msg)
+    .then((res) => {
+      emailStatusMessage = "Email sent successfully!";
+      window.alert(emailStatusMessage);
+      console.log(res);
+    })
+    .catch((error) => {
+      emailStatusMessage =
+        "An error occurred while sending the email! Please resend.";
+      if (error instanceof Error) {
+        window.alert(`${emailStatusMessage} ${error.message}`);
+      }
+    })
+    .finally(() => {
+      formData.delete("full_name");
+      formData.delete("phone_number");
+      formData.delete("service");
+      formData.delete("time");
+      formData.delete("message");
+    });
+}
+---
+
+<div class="contact-container">
+  <section>
+    <h1>Contact us</h1>
+    <h2>Request a quote</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <form class="form" id="contact-form" method="POST">
+      <div class="form-row">
+        <div class="input-container">
+          <label for="full_name">Full Name</label>
+          <input type="text" name="full_name" required />
+        </div>
+        <div class="input-container">
+          <label for="phone_number">Phone Number</label>
+          <input type="tel" name="phone_number" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="dropdown-container">
+          <label for="service">Select service</label>
+          <select id="service" class="dropdown" name="service" required>
+            <option value="" disabled selected></option>
+            <option value="general_cleaning">General Cleaning</option>
+            <option value="deep_cleaning">Deep Cleaning</option>
+            <option value="move_in_out_cleaning"
+              >Move-In/Move-Out Cleaning</option
+            >
+            <option value="carpet_cleaning">Carpet Cleaning</option>
+            <option value="window_cleaning">Window Cleaning</option>
+            <option value="kitchen_cleaning">Kitchen Cleaning</option>
+            <option value="bathroom_cleaning">Bathroom Cleaning</option>
+            <option value="laundry_services">Laundry Services</option>
+            <option value="organization_services">Organization Services</option>
+            <option value="custom_cleaning">Custom Cleaning</option>
+          </select>
+        </div>
+        <div class="dropdown-container">
+          <label for="time">Select time</label>
+          <select id="time" class="dropdown" name="time" required>
+            <option value="" disabled selected></option>
+            <option value="morning">Morning (9:00 AM - 12:00 PM)</option>
+            <option value="afternoon">Afternoon (1:00 PM - 4:00 PM)</option>
+            <option value="evening">Evening (5:00 PM - 8:00 PM)</option>
+            <option value="weekend">Weekend (10:00 AM - 6:00 PM)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="message-box">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Type your message..." name="message"
+        ></textarea>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" name="terms" id="terms" required />
+        <label for="terms">I accept the <a href="#">Terms</a></label>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+    {emailStatusMessage && <p>{emailStatusMessage}</p>}
+  </section>
+</div>
+
+<style>
+  /* Container Styles */
+  .contact-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2.8rem;
+    border-radius: 8px;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Paragraph */
+  p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Form Styles */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+
+  /* Input and Dropdown Containers */
+  .input-container,
+  .dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 50%;
+  }
+
+  /* Message Box */
+  .message-box {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+
+  .message-box label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .message-box textarea {
+    height: 100px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    resize: none;
+    box-shadow: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .message-box textarea:focus {
+    border-color: #007bff;
+  }
+
+  /* Input and Dropdown */
+  label {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  .dropdown,
+  input[type="text"],
+  input[type="tel"] {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #333;
+    border-radius: 6px;
+    appearance: none;
+    background-color: #fff;
+  }
+
+  .dropdown {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+  }
+
+  /* Checkbox Row */
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .checkbox-row a {
+    color: #000;
+  }
+
+  .checkbox-row a:hover {
+    text-decoration: underline;
+  }
+
+  /* Submit Button */
+  button {
+    padding: 0.8rem;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 96px;
+  }
+
+  button:hover {
+    background-color: #333;
+  }
+
+  /* Responsive Styles */
+  @media only screen and (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+    }
+
+    .input-container,
+    .dropdown-container {
+      width: 100%;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+</style>
