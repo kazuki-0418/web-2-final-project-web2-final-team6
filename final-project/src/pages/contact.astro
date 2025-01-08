@@ -1,0 +1,133 @@
+---
+import { Image } from "astro:assets";
+import ContactForm from "../components/ContactForm.astro";
+import Layout from "../layouts/Layout.astro";
+import GirlCleaningTable from "../assets/images/girl-cleaning-table.jpeg";
+export const prerender = false;
+---
+
+<Layout>
+  <div class="contact-wrapper">
+    <ContactForm />
+    <div class="image-container">
+      <Image
+        src={GirlCleaningTable}
+        alt={"girl cleaning table"}
+        class="side-image"
+      />
+    </div>
+  </div>
+
+  <section class="help-section">
+    <div class="help-content">
+      <h1>How we can help...</h1>
+      <p>
+        We offer a wide range of procedures to help you get the perfect smile.
+      </p>
+      <a href="#" class="request-link">Request a quote</a>
+    </div>
+    <div class="help-button">
+      <a href="#" class="request-button">Request a quote</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+    gap: 2rem;
+    padding: 32px;
+  }
+
+  .image-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .side-image {
+    height: 100%;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  section.help-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #000;
+    padding: 20px 32px;
+    margin: 56px;
+    background-color: #fff;
+  }
+
+  .help-content {
+    max-width: 60%;
+  }
+
+  .help-content h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .help-content p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  .help-content .request-link {
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .help-content .request-link:hover {
+    text-decoration: underline;
+  }
+
+  .help-button {
+    text-align: right;
+  }
+
+  .help-button .request-button {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .help-button .request-button:hover {
+    background-color: #555;
+  }
+
+  @media (max-width: 1024px) {
+    .contact-wrapper {
+      flex-direction: column;
+    }
+
+    .image-container {
+      display: none;
+    }
+
+    section.help-section {
+      flex-direction: column;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    .help-content {
+      max-width: 100%;
+    }
+  }
+</style>
