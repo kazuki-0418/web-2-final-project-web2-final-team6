@@ -1,62 +1,63 @@
 ---
 import { Image } from "astro:assets";
 import ddsgnr from "../assets/logos/ddsgnr.png";
-import Banner from "./Banner.astro";
 ---
-<section id="header">
-    <Banner />
-    <nav>
-        <Image src={ddsgnr} alt="Logo" width={130.6} />
-        <div class="desktop_links">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/our_services">Services</a>
-            <a href="/teams">Teams</a>
-            <a href="/contact">Contact</a>
-            <button class="request_quote">Request A Quote</button>
-        </div>
-        <div class="hamburger_menu" id="hamburger">
-            <span class="line line1"></span>
-            <span class="line line2"></span>
-            <span class="line line3"></span>
-        </div>
-    </nav>
-    <div class="dropdown_menu" id="dropdown">
-        <div class="links">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/our_services">Services</a>
-            <a href="/teams">Teams</a>
-            <a href="/contact">Contact</a>
-            <button class="request_quote">Request A Quote</button>
-        </div>
-        <div class="informations">
-            <div>For emergency cases: 567 123 45 67</div>
-            <div>Location: 121 Wallstreet Street, NY , USA </div>
-            <div>Open hours: 9.00-24.00 Mon-Sat</div>
-            <div>Email:info@ddsgnr.com</div>
-        </div>
+
+<header>
+  <nav>
+    <Image src={ddsgnr} alt="Logo" width={130.6} />
+    <div class="desktop_links">
+      <a href="/">Home</a>
+      <a href="/about-us">About</a>
+      <a href="/our_services">Services</a>
+      <a href="/teams">Teams</a>
+      <a href="/contact">Contact</a>
+      <button class="request_quote">Request A Quote</button>
     </div>
-</section>
+    <div class="hamburger_menu" id="hamburger">
+      <span class="line line1"></span>
+      <span class="line line2"></span>
+      <span class="line line3"></span>
+    </div>
+  </nav>
+  <div class="dropdown_menu" id="dropdown">
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/about-us">About</a>
+      <a href="/our_services">Services</a>
+      <a href="/teams">Teams</a>
+      <a href="/contact">Contact</a>
+      <button class="request_quote">Request A Quote</button>
+    </div>
+    <div class="informations">
+      <div><strong>For emergency cases: 567 123 45 67</strong></div>
+      <div>Location: 121 Wallstreet Street, NY , USA</div>
+      <div>Open hours: 9.00-24.00 Mon-Sat</div>
+      <div>Email:info@ddsgnr.com</div>
+    </div>
+  </div>
+</header>
 <script>
-  const btn = document.querySelector('.request_quote');
-  btn.addEventListener('click', () => {
-    window.location.href = '/contact';
-  })
+  const btn = document.querySelector(".request_quote")!;
+  btn.addEventListener("click", () => {
+    window.location.href = "/contact";
+  });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const dropdown = document.getElementById('dropdown');
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger")!;
+    const dropdown = document.getElementById("dropdown")!;
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      dropdown.classList.toggle('active');
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      dropdown.classList.toggle("active");
     });
   });
 </script>
 <style lang="scss">
-  #header {
-    position: relative;
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
     nav {
       padding: 0 4rem;
@@ -64,6 +65,9 @@ import Banner from "./Banner.astro";
       height: 72px;
       justify-content: space-between;
       align-items: center;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      background-color: white;
 
       .desktop_links {
         display: flex;
@@ -181,13 +185,13 @@ import Banner from "./Banner.astro";
   }
 
   @media (max-width: 1024px) {
-    #header nav .desktop_links {
+    header nav .desktop_links {
       display: none;
     }
   }
 
   @media (min-width: 1024px) {
-    #header nav .hamburger_menu {
+    header nav .hamburger_menu {
       display: none;
     }
   }
