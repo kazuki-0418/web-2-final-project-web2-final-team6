@@ -12,7 +12,6 @@ import OurTeam from "../components/OurTeam.astro";
 <Layout>
     <main>
         <div class="containerOne">
-            <p class="about">About Us</p>
             <h2 class="hedAbout">
                 Let us take care of all your cleaning service needs.
             </h2>
@@ -139,17 +138,13 @@ import OurTeam from "../components/OurTeam.astro";
             flex-direction: column; /* Cambia el diseño a una columna para dispositivos móviles */
             gap: 20px; /* Añade espacio entre los contenedores */
             overflow-x: hidden;
-            margin-top: -125px;
+            padding: 24px;
         }
 
         .containerOne,
         .containerTwo {
             width: 100%; /* Los contenedores ocupan todo el ancho disponible */
-            margin-left: -48px;
-        }
-
-        .containerTwo {
-            margin-top: -65px;
+            padding: 0;
         }
 
         .about {
@@ -172,7 +167,6 @@ import OurTeam from "../components/OurTeam.astro";
 
         .side_image {
             height: auto; /* Deja que la imagen ajuste su altura automáticamente */
-            transform: scaleX(-1);
         }
     }
 </style>
