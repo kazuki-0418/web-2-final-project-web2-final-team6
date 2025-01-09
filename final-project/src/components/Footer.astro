@@ -1,0 +1,380 @@
+---
+import Facebook from "../assets/icons/Facebook.png";
+import Instagram from "../assets/icons/Instagram.png";
+import Twitter from "../assets/icons/Twitter.png";
+import LinkedIn from "../assets/icons/LinkedIn.png";
+import ddsgnr from "../assets/logos/ddsgnr.png";
+import { Image } from "astro:assets";
+---
+
+<footer class="desktop_footer">
+  <div class="footer_container">
+    <div class="subscribe">
+      <Image src={ddsgnr} alt="Astro Logo" width={120} height={40} />
+      <p>Join our newsletter to stay up to date on features and releases.</p>
+      <div class="form">
+        <form action="/subscribe">
+          <input
+            type="email"
+            name="email"
+            placeholder="enter your email address"
+            required
+          />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      By subscribing you agree to with our Privacy Policy and provide consent to
+      receive updates from our company.
+    </div>
+    <div class="links">
+      <ul class="list">
+        <p class="about">About us</p>
+        <li class="list-item"><a href="/">Home</a></li>
+        <li class="list-item"><a href="/about-us">About</a></li>
+        <li class="list-item"><a href="/services">Services</a></li>
+        <li class="list-item"><a href="/teams">Teams</a></li>
+        <li class="list-item"><a href="/contact">Contact</a></li>
+      </ul>
+
+      <ul class="list">
+        <p class="services">Services</p>
+        <li class="list-item"><a href="windows">Windows</a></li>
+        <li class="list-item"><a href="residential">Residential</a></li>
+        <li class="list-item"><a href="commercial">Commercial</a></li>
+        <li class="list-item"><a href="apartment">Apartment</a></li>
+        <li class="list-item"><a href="residential">Residential</a></li>
+      </ul>
+
+      <ul class="list">
+        <p class="follow">Follow Us</p>
+        <li class="list-item">
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={Facebook} alt="Facebook icon" width={24} height={24} />
+            Facebook
+          </a>
+        </li>
+
+        <li class="list-item">
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={Instagram} alt="Instagram" width={24} height={24} />
+            Instagram
+          </a>
+        </li>
+        <li class="list-item">
+          <a
+            href="https://www.twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={Twitter} alt="Twitter" width={24} height={24} />
+            Twitter
+          </a>
+        </li>
+        <li class="list-item">
+          <a
+            href="https://www.LinkedIn.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={LinkedIn} alt="LinkedIn" width={24} height={24} />
+            LinkedIn
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-info">
+    <span class="copy_right">2023 Ddsgnr. All rights reserved.</span>
+    <nav>
+      <a href="#privacy-policy">Privacy Policy</a>
+      <a href="#terms-of-service">Terms of Service</a>
+      <a href="#cookies-settings">Cookies Settings</a>
+    </nav>
+  </div>
+</footer>
+
+<footer class="mobile_footer">
+  <div class="footer_container">
+    <div class="footer-logo">
+      <Image src={ddsgnr} alt="Astro Logo" class="logo" />
+    </div>
+
+    <nav class="footer-nav">
+      <a href="/about-us">About</a>
+      <a href="/project">Project</a>
+      <a href="/contact">Contact</a>
+      <a href="/services">Services</a>
+    </nav>
+    <div class="footer-social">
+      <a
+        href="https://www.facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={Facebook} alt="Facebook icon" width={24} height={24} />
+      </a>
+
+      <a
+        href="https://www.instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={Instagram} alt="Instagram" width={24} height={24} />
+      </a>
+
+      <a
+        href="https://www.twitter.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={Twitter} alt="Twitter" width={24} height={24} />
+      </a>
+
+      <a
+        href="https://www.LinkedIn.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image src={LinkedIn} alt="LinkedIn" width={24} height={24} />
+      </a>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-info">
+      <p class="copy_right">2023 Ddsgnr. All rights reserved.</p>
+      <nav>
+        <a href="#privacy-policy">Privacy Policy</a>
+        <a href="#terms-of-service">Terms of Service</a>
+        <a href="#cookies-settings">Cookies Settings</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .desktop_footer {
+    padding: 40px;
+    height: 400px;
+  }
+
+  .footer_container {
+    display: flex;
+    flex-direction: row;
+    padding: 0 80px;
+    gap: 80px;
+    height: 300px;
+    align-items: center;
+  }
+
+  .subscribe {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+  }
+
+  form {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  }
+
+  input {
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid black;
+    width: 100%;
+  }
+
+  button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+
+  .links {
+    display: flex;
+    gap: 80px;
+    align-items: flex-start;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .list-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+  }
+
+  a {
+    display: flex;
+    gap: 4px;
+    color: black;
+  }
+
+  p {
+    font-size: 14px;
+    color: #333;
+  }
+
+  .about,
+  .services,
+  .follow {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: inherit;
+    width: 80px;
+  }
+
+  image {
+    display: flex;
+    align-self: flex-start;
+  }
+
+  .mobile_footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 48px;
+    width: 100%;
+  }
+
+  .footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50px;
+    height: auto;
+    margin: 0 auto 40px;
+  }
+
+  .footer-logo h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-nav a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  .footer-nav a:hover {
+    color: #007bff;
+  }
+
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-social a {
+    font-size: 1.5rem;
+    color: #333;
+    transition: color 0.3s;
+  }
+
+  .footer-social a:hover {
+    color: #007bff;
+  }
+
+  .footer-divider {
+    border-top: 1px solid #000;
+    margin: 1.5rem 0;
+    z-index: 100;
+  }
+
+  .footer-info {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .footer-info p {
+    margin-bottom: 24px;
+  }
+
+  .footer-info nav {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+  }
+
+  .footer-info a {
+    white-space: nowrap;
+  }
+
+  .copy_right {
+    width: fit-content;
+  }
+
+  @media (max-width: 1024px) {
+    .desktop_footer {
+      display: none;
+    }
+
+    .copy_right {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: fit-content;
+    }
+
+    .footer_container {
+      display: block;
+    }
+
+    .mobile_footer {
+      display: inline-flex;
+      gap: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .desktop_footer {
+      display: block;
+    }
+
+    .footer-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 80px;
+    }
+
+    .mobile_footer {
+      display: none;
+    }
+  }
+</style>
