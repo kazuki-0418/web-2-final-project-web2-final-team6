@@ -3,7 +3,6 @@ import sgMail from '@sendgrid/mail';
 
 sgMail.setApiKey(import.meta.env.SENDGRID_API_KEY);
 
-const SENDER = "kazuki.castle0418@gmail.com";
 
 // @ts-ignore
 export const POST: APIRoute = async ({ request }) => {

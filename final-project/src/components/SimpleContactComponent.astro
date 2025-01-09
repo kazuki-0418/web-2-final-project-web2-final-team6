@@ -18,12 +18,12 @@
   </div>
 </section>
 <script>
-  import EmailSender from '../scripts/EmailSender.js'
+  import EmailSender from "../scripts/EmailSender.js";
 
-  async function sendEmail(event) {
+  async function sendEmail(event: SubmitEvent) {
     event.preventDefault();
 
-    const form = document.getElementById('quoteForm') as HTMLFormElement;
+    const form = document.getElementById("quoteForm") as HTMLFormElement;
     const formData = new FormData(form);
 
     const fullName = formData.get("fullName");
@@ -33,18 +33,21 @@
     const emailSender = new EmailSender();
     await emailSender
       .setSubject(`New Quote Request from ${fullName}`)
-      .setText(`
+      .setText(
+        `
         Full Name: ${fullName}
         Phone Number: ${phoneNumber}
         Comment: ${comment}
         Message: ${formData.get("message")}
-      `)
+      `,
+      )
       .send();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('quoteForm');
-    form.addEventListener('submit', sendEmail);
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("quoteForm");
+    if (!form) return;
+    form.addEventListener("submit", sendEmail);
   });
 </script>
 <style lang="scss">
