@@ -1,72 +1,9 @@
----
-import sendGrid from "@sendgrid/mail";
-
-sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
-let emailStatusMessage = "";
-
-if (Astro.request.method === "POST") {
-  const formData = await Astro.request.formData();
-
-  const full_name = formData.get("full_name");
-  const phone_number = formData.get("phone_number");
-  const service = formData.get("service");
-  const time = formData.get("time");
-
-  const form = {
-    full_name,
-    phone_number,
-    service,
-    time,
-    message: formData.get("message"),
-  };
-
-  const msg = {
-    to: "cleaners@example.com",
-    from: "kazuki.castle0418@gmail.com",
-    subject: `New quote request from ${full_name}`,
-    replyTo: {
-      email: "kazuki.castle0418@gmail.com",
-      name: full_name,
-    },
-    text: `
-      Full Name: ${full_name}
-      Phone Number: ${phone_number}
-      Service: ${service}
-      Time: ${time}
-      Message: ${form.message}
-    `,
-  } as sendGrid.MailDataRequired;
-
-  sendGrid
-    .send(msg)
-    .then((res) => {
-      emailStatusMessage = "Email sent successfully!";
-      window.alert(emailStatusMessage);
-      console.log(res);
-    })
-    .catch((error) => {
-      emailStatusMessage =
-        "An error occurred while sending the email! Please resend.";
-      if (error instanceof Error) {
-        window.alert(`${emailStatusMessage} ${error.message}`);
-      }
-    })
-    .finally(() => {
-      formData.delete("full_name");
-      formData.delete("phone_number");
-      formData.delete("service");
-      formData.delete("time");
-      formData.delete("message");
-    });
-}
----
-
 <div class="contact-container">
   <section>
     <h1>Contact us</h1>
     <h2>Request a quote</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    <form class="form" id="contact-form" method="POST">
+    <form class="form" id="contact-form">
       <div class="form-row">
         <div class="input-container">
           <label for="full_name">Full Name</label>
@@ -122,9 +59,46 @@ if (Astro.request.method === "POST") {
 
       <button type="submit">Submit</button>
     </form>
-    {emailStatusMessage && <p>{emailStatusMessage}</p>}
   </section>
 </div>
+
+<script>
+  import EmailSender from "../scripts/EmailSender";
+
+  async function sendEmail(event: SubmitEvent) {
+    event.preventDefault();
+
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const full_name = formData.get("full_name");
+    const phone_number = formData.get("phone_number");
+    const service = formData.get("service");
+    const time = formData.get("time");
+
+    console.log(full_name, phone_number, service, time);
+
+    const emailSender = new EmailSender();
+    await emailSender
+      .setSubject(`New Quote Request from ${full_name}`)
+      .setText(
+        `
+        Full Name: ${full_name}
+        Phone Number: ${phone_number}
+        Service: ${service}
+        Time: ${time}
+        Message: ${formData.get("message")}
+      `,
+      )
+      .send();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contact-form");
+    if (!form) return;
+    form.addEventListener("submit", sendEmail);
+  });
+</script>
 
 <style>
   /* Container Styles */
