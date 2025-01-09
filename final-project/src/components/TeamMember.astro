@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+const { img, imgAlt, memberName, icons } = Astro.props;
+---
+
+<!-- <meta content="width=device-width, initial-scale=1" /> -->
+<div class="team-member">
+  <Image src={img} alt={imgAlt} width={300} />
+  <div class="team-member-info">
+    <h3>{memberName}</h3>
+    <p class="team-member-description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+      varius enim in eros elementum tristique.
+    </p>
+    <div class="icons">
+      {
+        icons.map((icon: { icon: string; link: string }) => (
+          <Image src={icon.icon} alt={icon.link} width={50} height={50} />
+        ))
+      }
+    </div>
+  </div>
+</div>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .team-member {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .team-members {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+
+  h3 {
+    display: flex;
+    flex-direction: column;
+    font-size: 21px;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+  }
+
+  .team-member-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  img {
+    border-radius: 20px;
+  }
+
+  @media (max-width: 1024px) {
+    .team-members {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .team-member {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .team-member-info {
+      align-items: center;
+    }
+
+    .team-member-description {
+      text-align: center;
+      max-width: 300px;
+    }
+  }
+</style>

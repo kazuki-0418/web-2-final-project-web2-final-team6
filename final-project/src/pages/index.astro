@@ -6,6 +6,7 @@ import Layout from "../layouts/Layout.astro";
 import ManCleaningKitchen from "../assets/images/man-kitchen-cleaning.jpeg";
 import Services from "../components/Services.astro";
 import ContactForm from "../components/ContactForm.astro";
+import OurTeam from "../components/OurTeam.astro";
 ---
 
 <Layout>
@@ -41,6 +42,8 @@ import ContactForm from "../components/ContactForm.astro";
     </main>
     <SimpleContactComponent />
     <Services />
+    <OurTeam />
+
     <NewsletterComponent />
 </Layout>
 
@@ -51,7 +54,6 @@ import ContactForm from "../components/ContactForm.astro";
         align-items: flex-start;
         justify-content: space-between;
         gap: 5px;
-        padding: 24px;
     }
 
     .containerOne {
