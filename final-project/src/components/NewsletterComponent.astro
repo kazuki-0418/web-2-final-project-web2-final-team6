@@ -1,24 +1,31 @@
 <div class="newsletter-container">
   <h1>Subscribe to our newsletter</h1>
   <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros
-    elementum tristique.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius
+    enim in eros elementum tristique.
   </p>
   <form id="newsletterForm">
-    <input type="email" id="email" name="email" placeholder="Enter your email" required />
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Enter your email"
+      required
+    />
     <button type="submit">Sign Up</button>
   </form>
   <p class="terms">
-    By clicking Sign Up you're confirming that you agree with our Terms and Conditions.
+    By clicking Sign Up you're confirming that you agree with our Terms and
+    Conditions.
   </p>
 </div>
 <script>
-  import EmailSender from '../scripts/EmailSender.js'
+  import EmailSender from "../scripts/EmailSender.js";
 
-  async function sendEmail(event) {
+  async function sendEmail(event: SubmitEvent) {
     event.preventDefault();
 
-    const form = document.getElementById('newsletterForm') as HTMLFormElement;
+    const form = document.getElementById("newsletterForm") as HTMLFormElement;
     const formData = new FormData(form);
 
     const email = formData.get("email");
@@ -31,9 +38,10 @@
       .send();
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('newsletterForm');
-    form.addEventListener('submit', sendEmail);
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("newsletterForm");
+    if (!form) return;
+    form.addEventListener("submit", sendEmail);
   });
 </script>
 <style lang="scss">
