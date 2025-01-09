@@ -1,0 +1,149 @@
+---
+import { Image } from "astro:assets";
+import ManCleaningKitchen from "../assets/images/man-kitchen-cleaning.jpeg";
+---
+
+<main>
+    <div class="containerOne">
+        <p class="about">About Us</p>
+        <h2 class="hedAbout">
+            Let us take care of all your cleaning service needs.
+        </h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            varius enim in eros elementum tristique. Duis cursus, mi quis
+            viverra ornare, eros dolor interdum nulla, ut commodo diam libero
+            vitae erat.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Suspendisse varius enim in eros elementum tristique. Duis cursus, mi
+            quis viverra ornare, eros dolor interdum nulla, ut commodo diam
+            libero vitae erat.Lo
+        </p>
+
+        <button>Request a quote</button>
+    </div>
+
+    <div class="containerTwo">
+        <Image
+            src={ManCleaningKitchen}
+            alt="Cleaning Man"
+            class={"side_image"}
+        />
+    </div>
+</main>
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+    main {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 5px;
+        padding: 20px;
+    }
+
+    .containerOne {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;
+        padding: 50px;
+        width: 50%;
+        margin-top: 100px;
+    }
+
+    .containerTwo {
+        width: 50%;
+        text-align: right;
+        padding: 50px;
+    }
+
+    .side_image {
+        width: 100%;
+        height: 720px;
+        object-fit: cover;
+        border-radius: 5px;
+        transform: scaleX(-1);
+    }
+
+    .about {
+        font-size: 16px;
+        color: black;
+        font-family: "Roboto", serif;
+        font-weight: 600;
+        font-style: normal;
+    }
+
+    .hedAbout {
+        color: black;
+        font-size: 48px;
+        font-weight: 700;
+        font-family: "Roboto", serif;
+        font-style: normal;
+        line-height: normal;
+        margin: 0 auto;
+    }
+
+    p {
+        color: black;
+        font-size: 24px;
+        font-family: "Roboto", serif;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    button {
+        color: white;
+        background-color: black;
+        font-size: 20px;
+        font-family: "Roboto", serif;
+        font-style: normal;
+        font-weight: 400;
+        border-radius: 5px;
+        border: 1px solid black;
+        padding: 18px;
+        margin-top: 30px;
+    }
+
+    @media all and (max-width: 1024px) {
+        main {
+            flex-direction: column; /* Cambia el diseño a una columna para dispositivos móviles */
+            gap: 20px; /* Añade espacio entre los contenedores */
+            overflow-x: hidden;
+            margin-top: -125px;
+        }
+
+        .containerOne,
+        .containerTwo {
+            width: 100%; /* Los contenedores ocupan todo el ancho disponible */
+            margin-left: -48px;
+        }
+
+        .containerTwo {
+            margin-top: -65px;
+        }
+
+        .about {
+            font-size: 20px;
+        }
+
+        .hedAbout {
+            line-height: normal; /* Reduce el tamaño de la cabecera para móviles */
+        }
+
+        p {
+            font-size: 22px; /* Reduce el tamaño del texto para facilitar la lectura */
+        }
+
+        button {
+            font-size: 20px; /* Reduce el tamaño del botón */
+            padding: 16px 20px; /* Ajusta el padding del botón */
+            border-radius: 8px;
+        }
+
+        .side_image {
+            height: auto; /* Deja que la imagen ajuste su altura automáticamente */
+            transform: scaleX(-1);
+        }
+    }
+</style>
