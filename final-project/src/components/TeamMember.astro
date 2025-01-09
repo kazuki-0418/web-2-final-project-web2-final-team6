@@ -13,7 +13,11 @@ const { img, imgAlt, memberName, icons } = Astro.props;
       varius enim in eros elementum tristique.
     </p>
     <div class="icons">
-      {icons.map((icon) => <Image src={icon.icon} alt={icon.link} />)}
+      {
+        icons.map((icon: { icon: string; link: string }) => (
+          <Image src={icon.icon} alt={icon.link} width={50} height={50} />
+        ))
+      }
     </div>
   </div>
 </div>
