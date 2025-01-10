@@ -1,13 +1,10 @@
 ---
-import { Image } from "astro:assets";
 import TeamMember from "./TeamMember.astro";
 import Member1 from "../assets/images/member-1.png";
 import Member2 from "../assets/images/member-2.png";
 import Member3 from "../assets/images/member-3.png";
 import Memeber4 from "../assets/images/member-4.png";
 import dribble from "../assets/icons/Dribble.png";
-import facebook from "../assets/icons/Facebook.png";
-import instagram from "../assets/icons/Instagram.png";
 import linkIn from "../assets/icons/LinkedIn.png";
 import twitter from "../assets/icons/Twitter.png";
 
@@ -40,11 +37,12 @@ const members = [
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   <section class="team-members">
     {
-      members.map((member) => (
+      members.map((member, index) => (
         <TeamMember
           img={member.img}
           imgAlt={member.imgAlt}
           memberName={member.memberName}
+          isHidden={index > 2}
           icons={[
             { icon: linkIn, link: "https://www.LinkedIn.com" },
             { icon: twitter, link: "https://www.twitter.com" },
@@ -53,61 +51,33 @@ const members = [
         />
       ))
     }
-    <button class="view">View all</button>
-
-    <!-- <div class="team-member">
-      <Image src={Member1} alt={"Memeber 1"} />
-      <div class="team-member-info">
-        <h3>Leslie Alexander</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique.
-        </p>
-      </div>
-      div class="icons">
-        <Image src={linkIn} alt={"LinkedIn"} />
-        <Image src={twitter} alt={"Twitter"} />
-        <Image src={dribble} alt={"Dribble"} />
-    </div>
-
-    <div class="team-member">
-      <Image src={Member2} alt={"Member 2"} />
-      <div class="team-member-info">
-        <h3>Ralph Edwards</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique.
-        </p>
-      </div>
-
-
-    </div>
-
-    <div class="team-member">
-      <Image src={Member3} alt={"Member 3"} />
-      <div class="team-member-info">
-        <h3>Annette Black</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur
-          alias sequi, tenetur ducimus provident sed. Pariatur nesciunt
-          accusamus porro, incidunt delectus expedita tempora.
-        </p>
-      </div>
-    </div>
-
-    <div class="team-member">
-      <Image src={Memeber4} alt={"Member 4"} width={300} />
-
-      <div class="team-member-info">
-        <h3>Savannah Nguyen</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          varius enim in eros elementum tristique.
-        </p>
-      </div>
-    </div> -->
+    <button class="view" id="view_all">View all</button>
   </section>
+  <script>
+    const hiddenTeamMembers = document.querySelectorAll('.hidden-team-member')
 
+    const handleResize = () => {
+      const displayState = window.innerWidth < 1024 ? "none" : "flex";
+
+      hiddenTeamMembers.forEach((card) => {
+        (card as HTMLElement).style.display = displayState;
+      });
+    };
+
+    // initial checkout
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    const viewAll = document.querySelector(".view");
+    if (viewAll) {
+      viewAll.addEventListener("click", () => {
+        hiddenTeamMembers.forEach(
+          (card) => ((card as HTMLElement).style.display = "flex"),
+        );
+        viewAll.style.display = "none";
+      });
+    }
+  </script>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
     main {
@@ -188,6 +158,13 @@ const members = [
         padding: 15px 32px;
         text-align: center;
         font-size: 16px;
+        border-radius: 5px;
+      }
+
+      .view:hover {
+          background-color: black;
+          color: white;
+          cursor: pointer;
       }
     }
   </style>

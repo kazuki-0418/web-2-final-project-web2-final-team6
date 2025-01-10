@@ -1,10 +1,8 @@
 ---
 import { Image } from "astro:assets";
-const { img, imgAlt, memberName, icons } = Astro.props;
+const { img, imgAlt, memberName, icons, isHidden } = Astro.props;
 ---
-
-<!-- <meta content="width=device-width, initial-scale=1" /> -->
-<div class="team-member">
+<div class={isHidden ? 'hidden-team-member' : 'team-member'}>
   <Image src={img} alt={imgAlt} width={300} />
   <div class="team-member-info">
     <h3>{memberName}</h3>
@@ -15,7 +13,7 @@ const { img, imgAlt, memberName, icons } = Astro.props;
     <div class="icons">
       {
         icons.map((icon: { icon: string; link: string }) => (
-          <Image src={icon.icon} alt={icon.link} width={50} height={50} />
+          <Image class="icon" src={icon.icon} alt={icon.link} width={50} height={50} />
         ))
       }
     </div>
@@ -31,16 +29,9 @@ const { img, imgAlt, memberName, icons } = Astro.props;
     padding: 20px;
   }
 
-  .team-member {
+  .hidden-team-member, .team-member {
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    padding: 20px;
-  }
-
-  .team-members {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
   }
@@ -48,9 +39,9 @@ const { img, imgAlt, memberName, icons } = Astro.props;
   h3 {
     display: flex;
     flex-direction: column;
-    font-size: 21px;
     font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
+    margin-bottom: 0;
   }
 
   .team-member-info {
@@ -64,16 +55,17 @@ const { img, imgAlt, memberName, icons } = Astro.props;
     gap: 10px;
   }
 
+  .icon {
+      width: 24px;
+      height: 24px;
+  }
+
   img {
     border-radius: 20px;
   }
 
   @media (max-width: 1024px) {
-    .team-members {
-      grid-template-columns: repeat(1, 1fr);
-    }
-
-    .team-member {
+    .hidden-team-member, .team-member {
       flex-direction: column;
       align-items: center;
     }

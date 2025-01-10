@@ -74,12 +74,10 @@ const SERVICES = [
 
   if (viewAll) {
     viewAll.addEventListener("click", () => {
-      viewAll.addEventListener("click", () => {
-        hidden_cards.forEach(
-          (card) => ((card as HTMLElement).style.display = "block"),
-        );
-        viewAll.style.display = "none";
-      });
+      hidden_cards.forEach(
+        (card) => ((card as HTMLElement).style.display = "block"),
+      );
+      viewAll.style.display = "none";
     });
   }
 </script>
