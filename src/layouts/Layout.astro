@@ -33,7 +33,9 @@ import Footer from "../components/Footer.astro";
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		display: inline-block;
+		@media (max-width: 600px) {
+			display: inline-block;
+		}
 	}
 
 	/* Basic settings for HTML */
